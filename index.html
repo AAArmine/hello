@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+  .ramka, form {
+    padding: 10px;
+
+  }
+ .ramka:hover {
+    filter: opacity(0.5);
+  }
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+      <img src="p1.jpg" width="200px" height="140px" class='ramka' id="1" style="<?php echo isset($_POST["submit"]) && ($_POST["hidden2"]
+      =="1") ? 'border:3px solid green;' : ''; ?>">
+      <img src="p2.jpg" width="200px" height="140px" class='ramka' id="2" style="<?php echo isset($_POST["submit"]) && ($_POST["hidden2"]=="2") ? 'border:3px solid green;' : ''; ?>">
+      <img src="p3.jpg" width="200px" height="140px" class='ramka' id="3" style="<?php echo isset($_POST["submit"]) && ($_POST["hidden2"]=="3") ? 'border:3px solid green;' : ''; ?>">
+      <img src="p4.jpg" width="200px" height="140px" class='ramka' id="4" style="<?php echo isset($_POST["submit"]) && ($_POST["hidden2"]=="4") ? 'border:3px solid green;' : ''; ?>">
+      <img src="p5.jpg" width="200px" height="140px" class='ramka' id="5" style="<?php echo isset($_POST["submit"]) && ($_POST["hidden2"]=="5") ? 'border:3px solid green;' : ''; ?>">
+
+      <form action="" method="post">
+        <input type="submit" value="Click to see the picture" name="submit">
+        <input type="hidden" name="hidden" value='<?php 
+            echo  isset($_POST["submit"])? $_POST["hidden"]: ''; ?>' id="inp"  style="width: 500px;">
+        <input type="hidden" name="hidden2" value='' id="inp2"  style="width: 500px;">
+
+      </form>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".ramka").click(function(){
+           var inp2_id = $(this).attr('id');
+          $(".ramka").css("border", "none");
+          $(this).css("border", "3px solid green");
+          $("#inp").val(this.src);
+          $("#inp2").val(inp2_id);
+        });
+      });
+    </script>
+    <?php
+
+         echo isset($_POST["submit"]) && ($_POST["hidden"]!=="")? "<div class='container'><img src='".$_POST["hidden"]."' width='700px' height='450px'></div>": "<div class='container'>Pick a picture</div>";
+
+    ?>
+</body>
+</html>
